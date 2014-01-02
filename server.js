@@ -10,7 +10,7 @@ var PERPAGE = 20;
 
 var runSearch = function(client, term, start, rows, fn) {
   //var url =  argv.es + '/_search?q=' + term + '&hl=true&hl.fl=description&fl=name,description,rating,keywords,author,modified,homepage,version,license,score&rows=' + rows + '&sort=rating desc,score desc&start=' + start;
-  var url =  argv.es + '/_search?q=' + term + '&hl=true&hl.fl=description&fl=name,description,keywords,author,modified,homepage,version,license&size=' + rows + '&from=' + start;
+  var url =  argv.es + '/_search?q=' + term + '&hl=true&hl.fl=description&fields=name,description,keywords,author,modified,homepage,version,license&size=' + rows + '&from=' + start;
   console.log('runsearch', term, start, rows, url);
   request({
     url: url,
@@ -28,7 +28,7 @@ var runSearch = function(client, term, start, rows, fn) {
         start: start,
         docs : json.hits.hits.map(function(hit) {
       
-          return hit._source;
+          return hit.fields;
         })
       }
     };
