@@ -1,6 +1,6 @@
 var argv = require('optimist').argv;
 var skateboard = require('skateboard');
-var routes = require('./routes');
+var routes = require(__dirname + '/../lib/routes');
 var request = require('request');
 var net = require('net');
 var split = require('split');
@@ -14,7 +14,7 @@ var runSearch = function(client, term, start, rows, fn) {
   request.get({
     url: url,
     json: {
-      fields: ['name','description','keywords','author','modified','homepage','version','license', 'rating'],
+      fields: ['name','description','keywords','author','modified','homepage','version','license','rating'],
       query: {
         query_string : {
           query : term,
@@ -91,7 +91,7 @@ var handleClient = function(client) {
 };
 
 skateboard({
-  dir: __dirname + '/public',
+  dir: __dirname + '/../public',
   port: argv.port || 8080,
   requestHandler : routes
 }, handleClient);
