@@ -148,10 +148,11 @@ li span.version {
   display:inline;
 }
 
-li span.author {
+li .author {
   color: #adadad;
   font-size: .95em;
   padding-left: .1em;
+  text-decoration: none
 }
 
 li span.timestamp-separator {
@@ -178,6 +179,7 @@ li p {
 ul.keywords {
   margin: 0;
   padding: 0;
+  display: inline-block;
 }
 
 li.keyword {

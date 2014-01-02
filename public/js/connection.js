@@ -71,16 +71,16 @@ function safe_tags_replace(str) {
     return str.replace(/[&<>]/g, replaceTag);
 }
 
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
 var templateResults = function(results) {
   var containerClone = container.cloneNode(true);
-  console.log('rendering:', results);
-  weld(containerClone, { result: results }, {
+  weld(containerClone, {result : results}, {
     map : function(p, e, k, v) {
       var where = e;
-      while (where.children[0]) {
-        where = where.children[0];
-      }
-
+      
       if (k === 'rating') {
         ratingColor(e.parentNode, parseFloat(v));
       }
@@ -93,9 +93,25 @@ var templateResults = function(results) {
         }
       }
 
-      if (e.tagName === 'A' && k === 'homepage') {
-        e.href = v;
+      if (e.tagName === 'A') {
+        switch (k) {
+          case 'homepage':
+            e.href = v;
+          break;
+
+          case 'author':
+            e.href="?q=author:" + v;
+            e.innerHTML = v;
+          break;
+        }
+
       } else if (v!==false) {
+        
+        if (k === 'name' || k === 'keyword' || isNumber(k)) {
+          while (where.children[0]) {
+            where = where.children[0];
+          }
+        }
         where.innerHTML = v;
       } else {
         e.style.display = 'none';
@@ -109,8 +125,10 @@ var templateResults = function(results) {
     },
     alias : {
       modified : 'timestamp',
-      keywords : 'keyword',
-      rating   : 'num'
+      rating   : 'num',
+      devDependencies: false,
+      maintainers: false,
+      users: false
     }
   });
 
@@ -248,7 +266,6 @@ skateboard(function(stream) {
 
       var results = [];
       obj.response.docs.forEach(function(doc) {
-
         if (typeof doc.rating === 'undefined') {
           doc.rating = 0.0;
         }
@@ -280,7 +297,7 @@ skateboard(function(stream) {
         if (!doc.keywords || !doc.keywords.length) {
           doc.keywords = false;
         }
-
+       console.log(doc.name, doc.keywords);
         doc.modified = +(new Date(doc.modified));
         doc.license = doc.license || '??';
         doc.homepage = doc.homepage || 'http://npmjs.com/package/' + doc.name;
@@ -292,7 +309,7 @@ skateboard(function(stream) {
         doc.homepage = doc.homepage.replace(/git@github.com:?/, 'https://github.com/');
 
         if (isNaN(doc.rating)) {
-          return;
+          //return;
         } else if (doc.rating >= 9.95) {
           doc.rating = '10';
         } else {
