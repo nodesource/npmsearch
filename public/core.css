@@ -1,0 +1,266 @@
+html {
+  margin: 0;
+  padding: 0;
+  font-size: 65%;
+  font-family: sans-serif;
+}
+
+.typekit-badge {
+  display:none !important;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  /*min-width: 1100px;*/
+  background: #5f5f66;
+}
+
+header {
+  padding: 1em 0 2em 0;
+  background: #3f3f46;
+  margin-bottom:1em;
+}
+
+#search {
+  width: 69%;
+  margin: 0 auto;
+}
+
+em, footer a {
+  color: rgb(245, 245, 209);
+  text-decoration: none
+}
+
+header h1 {
+  color: #C8C8C8;
+  font-weight: normal;
+  font-size: 3.5em;
+  padding:0 10em .1em 0;
+  margin:0;
+  background-image: url('/images/magnifier.svg');
+  background-size: .5em;
+  background-repeat: no-repeat;
+  background-position: 2.2em 30%;
+}
+
+#search input {
+  width: 100%;
+  color: #C8C8C8;
+  padding: 8px;
+  font-size: 2em;
+  /*border: 1px solid #aaa;*/
+  border-radius: 3px;
+  border:0;
+  background: #5f5f66;
+}
+
+textarea, input {
+  outline: none;
+  padding: 5px;
+}
+
+ul#results {
+  width: 75%;
+  min-width:550px;
+  margin: 0 auto;
+  list-style-type: none;
+}
+
+li h2 {
+  margin: 0;
+  display:inline;
+}
+
+li.result {
+  color: #fefefe;
+  padding: 1em;
+  text-align: left;
+  border-radius: 3px;
+  background: #5f5f66;
+  padding-left: 6em;
+  font-size: 2em;
+  padding-right: 2em;
+  position: relative;
+}
+
+li.result#selected {
+  background: #595960;
+}
+
+#searching {
+  display:none;
+  width:70%;
+  margin:0 auto;
+  padding:2em;
+  text-align:center;
+  background: #5f5f66;
+  height: 500px;
+}
+
+body.searching #searching {
+  display:block;
+}
+
+li div.rating div.num {
+  padding-left: 0em;
+  font-size: 2.5em;
+}
+
+li div.rating {
+  top: 1.5em;
+  right: 4.5em;
+  color: #2C7D33;
+  margin: -40px 0 -30px 0;
+  border-radius: 3px;
+  position: relative;
+  border-right: 0;
+  background: #EDFFEF;
+  width: 0;
+  font-weight: bold;
+}
+
+h2.name:after {
+  font-size: .5em;
+  color: #999;
+  line-height: 1.2em;
+  padding-right: .5em;
+  font-weight: normal;
+  padding: 0;
+  margin-right: -.3em;
+}
+
+a.homepage {
+  color: rgb(209, 209, 209);
+  padding-right: 20px;
+  text-decoration: none;
+  background-repeat: no-repeat;
+  background-position: 100% 30%;
+  background-image: url("/images/external-link.svg");
+  letter-spacing: .03em;
+  background-size: 17px;
+}
+
+li span.version {
+  color: #999;
+  font-size: .8em;
+  top: -1.5em;
+  display:inline;
+}
+
+li span.author {
+  color: #adadad;
+  font-size: .95em;
+  padding-left: .1em;
+}
+
+li span.timestamp-separator {
+  font-size: .65em;
+  color: #888;
+}
+
+span.timestamp {
+  color: #aaa;
+  padding-left: .1em;
+  font-size: .75em;
+  content: '20 days ago';
+}
+
+li p {
+  margin: .25em 0;
+  color: #bbb;
+  position: relative;
+  top: 0;
+  left: 0em;
+  color: rgb(209, 209, 209);
+}
+
+ul.keywords {
+  margin: 0;
+  padding: 0;
+}
+
+li.keyword {
+  font-size: .8em;
+  padding: 0;
+  margin: 0 .5em 0 0;
+  line-height: .5em;
+  list-style: none;
+  display: inline-block;
+  color: #000;
+}
+
+li.keyword a, section#intro a {
+  color: #999;
+  text-decoration: none;
+  border-bottom: 1px solid #777;
+}
+
+ul.licenses {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 1.5em;
+  right: 3em;
+  font-size: 1em;
+  color: #aaa;
+  display:none;
+}
+
+li.license {
+  padding: 0;
+  margin: 0 10px 0 0;
+  display: inline;
+}
+
+footer {
+  width: 100%;
+  font-size: 2em;
+  color: #2f2f36;
+  padding: 1em 0;
+  text-align: center;
+}
+#keyContainer {
+  background:transparent;
+}
+#keyHeader {
+  width: 50%;
+  color: #C8C8C8;
+  font-weight: normal;
+  font-size: 3.5em;
+  padding: 0px;
+  margin: 0 auto;
+}
+#keyBody {
+  width:60%;
+  color: #C8C8C8;
+  margin: 0 auto;
+  background: #5f5f66;
+  border: 1px solid rgb(63, 63, 70);
+  border-radius: 3px;
+}
+#keyBody p {
+  margin: 1.5em 0 0;
+
+}
+#keyBody span {
+  display: block;
+  color: #bbbbbb;
+  margin: 0 0 .2em .5em;
+  font-size: 1.8em;
+}
+
+section#intro {
+  width: 50%;
+  min-width:500px;
+  margin:0 auto;
+  font-size: 2em;
+  color:#C8C8C8;
+  background: #595960;
+  padding:.5em;
+}
+
+.twitter-follow-button {
+  position:absolute;
+  right: 1%;
+}

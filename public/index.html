@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>npmsearch - node.js Package Search Utility</title>
+    <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="npm" />
+    <script type="text/javascript" src="/js/prefixfree.min.js"></script>
+    <script type="text/javascript" src="/js/hsv.js"></script>
+    <script type="text/javascript" src="skateboard.min.js"></script>
+    <script type="text/javascript" src="/js/weld.js"></script>
+    <script type="text/javascript" src="/js/picoModal.js"></script>
+    <link type="text/css" rel="stylesheet" media="all" href="core.css" />
+
+    <script type="text/javascript" src="//use.typekit.net/skf0vvy.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  </head>
+  <body>
+    <header>
+
+      <a href="https://twitter.com/npmsearch" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @npmsearch</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+      <section id="search">
+        <h1>npm</h1>
+        <input type="text" name="search" tabindex="0" />
+      </section>
+    </header>
+
+    <section id="result-container" style="display:none">
+      <ul id="results">
+        <li class="result">
+          <div class="rating"><div class="num">9.8</div></div>
+          <h2 class="name">
+            <a class="homepage" href="">Untitled Project</a>
+          </h2>
+          <span class="version">unknown</span>
+          <span class="timestamp-separator"> by </span>
+          <span class="author">unknown</span>
+          <span class="timestamp-separator"> ~ </span>
+          <span class="timestamp">unknown</span>
+          <p class="description"></p>
+          <ul class="keywords">
+            <li class="keyword"><a href="" class="text"></a></li>
+          </ul>
+          <ul class="licenses">
+            <li class="license">??</li>
+          </ul>
+        </li>
+      </ul>
+      <div id="searching"><img src="images/spinner.gif" /></div>
+    </section>
+
+    <section id="intro">
+      <p>
+        Search for node packages on the npm registry
+      </p>
+      <p>
+        Example searches:
+        <ul>
+          <li><a href="?q=request">request</a></li>
+          <li><a href="?q=author:substack">author:substack</a></li>
+          <li><a href="?q=keywords:leveldb,voxel">keywords:leveldb,voxel</a></li>
+        </ul>
+      </p>
+
+      <p>
+        Ratings are based on a number of metrics including:
+        <ul>
+          <li>number of stars</li>
+          <li>number of dependents</li>
+          <li>release frequency</li>
+          <li>existence of tests/readme/etc..</li>
+        </ul>
+      </p>
+    </section>
+
+    <footer>
+      <span id="copyright">
+        <p>built by <a href="http://solids.io">solids</a></p>
+      </span>
+   </footer>
+    <script type="text/javascript" src="/js/classy.js"></script>
+    <script type="text/javascript" src="/js/resultnav.js"></script>
+    <script type="text/javascript" src="/js/connection.js"></script>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-39909437-1', 'npmsearch.com');
+      ga('send', 'pageview');
+
+    </script>
+
+
+  </body>
+</html>
