@@ -14,14 +14,14 @@ var runSearch = function(client, term, start, rows, fn) {
   request.get({
     url: url,
     json: {
-      fields: ['name','description','keywords','author','modified','homepage','version','license'],
+      fields: ['name','description','keywords','author','modified','homepage','version','license', 'rating'],
       query: {
-        multi_match : {
+        query_string : {
           query : term,
-          fields: ['name^4','description'],
-        },
+          fields: ['name^4', 'description'],
+        }
       },
-      sort: ['_score'],
+      sort: [{'rating' : "desc"}],
       highlight: {
         fields: {
           description : {}
@@ -29,10 +29,9 @@ var runSearch = function(client, term, start, rows, fn) {
       }
     }
   }, function(e, r, json) {
-
-    if (e || !json) {
+    if (e || !json || !json.hits) {
       console.log('WTF: runsearch', e, json);
-      fn && fn(e);
+      fn && fn(e || {});
       return;
     }
 

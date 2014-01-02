@@ -297,7 +297,7 @@ skateboard(function(stream) {
         if (!doc.keywords || !doc.keywords.length) {
           doc.keywords = false;
         }
-       console.log(doc.name, doc.keywords);
+
         doc.modified = +(new Date(doc.modified));
         doc.license = doc.license || '??';
         doc.homepage = doc.homepage || 'http://npmjs.com/package/' + doc.name;
