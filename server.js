@@ -9,14 +9,19 @@ var split = require('split');
 var PERPAGE = 20;
 
 var runSearch = function(client, term, start, rows, fn) {
-  //var url =  argv.es + '/_search?q=' + term + '&hl=true&hl.fl=description&fl=name,description,rating,keywords,author,modified,homepage,version,license,score&rows=' + rows + '&sort=rating desc,score desc&start=' + start;
-  var url =  argv.es + '/_search';//?q=' + term + '&hl=true&hl.fl=description&fields=name,description,keywords,author,modified,homepage,version,license&size=' + rows + '&from=' + start;
+  var url =  argv.es + '/_search?pretty=false&size=' + rows + '&from=' + start;
   console.log('runsearch', term, start, rows, url);
-  request({
+  request.get({
     url: url,
     json: {
-      query : { query_string : { query : term } } ,
       fields: ['name','description','keywords','author','modified','homepage','version','license'],
+      query: {
+        multi_match : {
+          query : term,
+          fields: ['name^4','description'],
+        },
+      },
+      sort: ['_score'],
       highlight: {
         fields: {
           description : {}
