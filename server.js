@@ -10,24 +10,33 @@ var PERPAGE = 20;
 
 var runSearch = function(client, term, start, rows, fn) {
   //var url =  argv.es + '/_search?q=' + term + '&hl=true&hl.fl=description&fl=name,description,rating,keywords,author,modified,homepage,version,license,score&rows=' + rows + '&sort=rating desc,score desc&start=' + start;
-  var url =  argv.es + '/_search?q=' + term + '&hl=true&hl.fl=description&fields=name,description,keywords,author,modified,homepage,version,license&size=' + rows + '&from=' + start;
+  var url =  argv.es + '/_search';//?q=' + term + '&hl=true&hl.fl=description&fields=name,description,keywords,author,modified,homepage,version,license&size=' + rows + '&from=' + start;
   console.log('runsearch', term, start, rows, url);
   request({
     url: url,
-    json: true
+    json: {
+      query : { query_string : { query : term } } ,
+      fields: ['name','description','keywords','author','modified','homepage','version','license'],
+      highlight: {
+        fields: {
+          description : {}
+        }
+      }
+    }
   }, function(e, r, json) {
+
     if (e || !json) {
       console.log('WTF: runsearch', e, json);
       fn && fn(e);
       return;
     }
-    out = {
-      highlighting: {},
+
+    var out = {
       response: {
         numFound: json.hits.total,
         start: start,
         docs : json.hits.hits.map(function(hit) {
-      
+          hit.fields.highlight = hit.highlight;
           return hit.fields;
         })
       }
@@ -35,7 +44,7 @@ var runSearch = function(client, term, start, rows, fn) {
 
     out.type = "results";
     client.writable && client.write(JSON.stringify(out)+'\n');
-    fn && fn(null, json);
+    fn && fn(null, out);
   });
 
 fn && fn({});

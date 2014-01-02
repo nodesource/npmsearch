@@ -80,7 +80,7 @@ var templateResults = function(results) {
   weld(containerClone, {result : results}, {
     map : function(p, e, k, v) {
       var where = e;
-      
+
       if (k === 'rating') {
         ratingColor(e.parentNode, parseFloat(v));
       }
@@ -275,13 +275,13 @@ skateboard(function(stream) {
           //return;
         }
 
-        if (obj.highlighting[doc.name]) {
-          var parts = obj.highlighting[doc.name];
+        if (doc.highlight) {
+          var parts = doc.highlight.description;
           var description = doc.description;
-          if (parts.description) {
-            parts.description.forEach(function(line) {
+          if (parts) {
+            parts.forEach(function(line) {
               var clean = line.replace(/<\/?em>/gi, '');
-              description = description.replace(clean, parts.description)
+              description = description.replace(clean, parts)
             });
           }
 
