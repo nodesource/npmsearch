@@ -1,6 +1,12 @@
+# npmsearch.com
 
+This is the code that powers [npmsearch.com](http://npmsearch.com), which provides a clean interface to searching pseudo-rated node packages from npm.
+
+The rest of this document describes how you would get your own npmsearch up and running.
 
 ## Setup Elasticsearch
+
+See the [elasticsearch docs](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/setup.html) for setting up a node
 
 ```bash
 
@@ -46,17 +52,23 @@ curl -XPUT http://localhost:9200/registry/package/_mapping -d'
 ## pipe the npm registry into elasticsearch
 
 ```
+
 npm2es --couch="http://isaacs.iriscouch.com/registry" --es="http://localhost:9200/registry"
+
 ```
 
 ## run the server
 
 ```
+
 node bin/server.js --es="http://localhost:9201/registry"
-``
+
+```
 
 ## compute ratings
 
 ```
+
 node bin/rating.js --es="http://localhost:9201/registry"
+
 ```
