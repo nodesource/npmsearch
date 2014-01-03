@@ -7,7 +7,7 @@ var request = require('request'),
     url = require('url');
 
 if (!argv.es) {
-  return console.log('USAGE: node rating3.js --es="http://host:port/npmsearch"');
+  return console.log('USAGE: node rating3.js --es="http://host:port/npmsearch" [--interval=30]');
 }
 
 var releaseTime = 0;
@@ -347,7 +347,7 @@ function store(array) {
 
   }, function(e) {
     console.log('done!');
-    setTimeout(recompute, 15*1000*60);
+    setTimeout(recompute, (argv.interval || 30)*1000*60);
   });
 }
 
