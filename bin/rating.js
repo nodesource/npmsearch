@@ -1,4 +1,3 @@
-
 var request = require('request'),
     argv = require('optimist').argv,
     net = require('net'),
@@ -14,7 +13,7 @@ if (!argv.es) {
 var releaseTime = 0;
 // Phase 1: Collect metrics
 // collect: releaseFrequency, stars, tests, and linkage
-var metrics = {};
+var metrics;
 var globalMetrics = {
   dependents  : {
     max: 0,
@@ -46,15 +45,21 @@ var globalMetrics = {
     contributing: 0
   }
 };
-var linkage = {};
+var linkage;
 
 var MIN_RELEASE_TIME = 1000*60*60;
 var totalProjects = 0, recomputePageLimit = 100;
 function recompute() {
+  linkage = {};
+  metrics = {};
+
   request.get({
     url: argv.es + '/_search?size=100&scroll=5m&search_type=scan',
     json: { query : { match_all : {} } },
   }, function(e, r, o) {
+    if (e || !o) {
+      throw new Error('could not connect to elasticsearch');
+    }
     var end = false;
     async.whilst(function() {
       return !end;
@@ -120,9 +125,6 @@ function collect(project) {
   }
 
   // Metrics
-  if (metrics[project.name]) {
-
-  }
   metrics[project.name] = {};
 
   // Metrics: users
@@ -192,7 +194,6 @@ function collect(project) {
   }
 
   // Metrics: Readme
-  process.stdout.write(project.readme ? '1' : '0')
   if (project.readme) {
     if (!project.readme || 
         project.readme === "ERROR: No README.md file found!" ||
@@ -330,10 +331,8 @@ function stats() {
 
 // Phase 4: store in es
 function store(array) {
-
-  console.log(JSON.stringify(array, null, '  '));
   console.log(globalMetrics);
-//  console.log('SAVING', (JSON.stringify(array).length/1024) + 'K');
+  // TODO: use the bulk update api
   async.eachSeries(array, function(update, fn) {
     request.post({
       url: argv.es + "/package/" + update.id + '/_update',
@@ -343,12 +342,12 @@ function store(array) {
         }
       }
     }, function(e, r, o) {
-      console.log(o);
       fn(e);
     })
 
   }, function(e) {
     console.log('done!');
+    setTimeout(recompute, 15*1000*60);
   });
 }
 
