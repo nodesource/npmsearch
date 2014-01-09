@@ -14,37 +14,7 @@ var releaseTime = 0;
 // Phase 1: Collect metrics
 // collect: releaseFrequency, stars, tests, and linkage
 var metrics;
-var globalMetrics = {
-  dependents  : {
-    max: 0,
-    sum: 0,
-    weight: 5,
-    contributing: 0
-  },
-  users  : {
-    max: 0,
-    sum: 0,
-    weight: 1,
-    contributing: 0
-  },
-  releaseFrequency  : {
-    min: Infinity,
-    max: 0,
-    sum: 0,
-    weight: 1,
-    contributing: 0
-  },
-  tests  : {
-    sum: 0,
-    weight: 2,
-    contributing: 0
-  },
-  readme : {
-    sum: 0,
-    weight: 1,
-    contributing: 0
-  }
-};
+var globalMetrics;
 var linkage;
 
 var MIN_RELEASE_TIME = 1000*60*60;
@@ -52,6 +22,38 @@ var totalProjects = 0, recomputePageLimit = 100;
 function recompute() {
   linkage = {};
   metrics = {};
+
+  globalMetrics = {
+    dependents  : {
+      max: 0,
+      sum: 0,
+      weight: 5,
+      contributing: 0
+    },
+    users  : {
+      max: 0,
+      sum: 0,
+      weight: 1,
+      contributing: 0
+    },
+    releaseFrequency  : {
+      min: Infinity,
+      max: 0,
+      sum: 0,
+      weight: 1,
+      contributing: 0
+    },
+    tests  : {
+      sum: 0,
+      weight: 2,
+      contributing: 0
+    },
+    readme : {
+      sum: 0,
+      weight: 1,
+      contributing: 0
+    }
+  };
 
   request.get({
     url: argv.es + '/_search?size=100&scroll=5m&search_type=scan',
