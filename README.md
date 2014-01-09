@@ -61,7 +61,7 @@ npm2es --couch="http://isaacs.iriscouch.com/registry" --es="http://localhost:920
 
 ```
 
-node bin/server.js --es="http://localhost:9201/registry"
+node bin/server.js --es="http://localhost:9200/registry"
 
 ```
 
@@ -69,6 +69,6 @@ node bin/server.js --es="http://localhost:9201/registry"
 
 ```
 
-node bin/rating.js --es="http://localhost:9201/registry"
+node bin/rating.js --es="http://localhost:9200/registry"
 
 ```
