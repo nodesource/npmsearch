@@ -4,7 +4,7 @@
     "split": "~0.2.10",
     "optimist": "~0.6.0",
     "levelup": "~0.18.2",
-    "skateboard": "~0.2.2",
+    "skateboard": "~0.2.3",
     "request": "~2.30.0",
     "async": "~0.2.9"
   }
