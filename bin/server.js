@@ -8,8 +8,15 @@ var split = require('split');
 
 var PERPAGE = 20;
 
+var andexp = /&&?| and /ig;
+
+var findAnd = function(term) {
+  return term.replace(andexp, ' AND ').replace(/  /g, ' ').trim()
+};
+
 var runSearch = function(client, term, start, rows, fn) {
   var url =  argv.es + '/_search?pretty=false&size=' + rows + '&from=' + start;
+  term = findAnd(term);
   console.log('runsearch', term, start, rows, url);
   request.get({
     url: url,
