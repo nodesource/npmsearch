@@ -147,7 +147,7 @@ var applyQtoInput = function() {
   if (window.location.search) {
     var matches = window.location.search.match(/\?q=([^#]+)/);
     if (matches) {
-      input.value = matches[1].replace(/%20|\+/g,' ');
+      input.value = unescape(matches[1].replace(/%20|\+/g,' '));
       window.title = 'NPMSearch - ' + input.value;
       document.getElementById('intro').style.display = 'none';
       document.getElementById('result-container').style.display = 'block';
