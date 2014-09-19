@@ -106,7 +106,7 @@ var templateResults = function(results) {
         }
 
       } else if (v!==false) {
-        
+
         if (k === 'name' || k === 'keyword' || isNumber(k)) {
           while (where.children[0]) {
             where = where.children[0];
@@ -212,6 +212,13 @@ skateboard(function(stream) {
 
     last = val;
 
+    // make it easier to use this thing
+    val = val.split(' ').map(function(word) {
+      if (word.indexOf('-') > -1) {
+        return '"' + word + '"'
+      }
+    }).filter(Boolean).join(' ');
+
     var data = JSON.stringify({
         type: 'search',
         value: val,
@@ -271,7 +278,7 @@ skateboard(function(stream) {
         }
 
         if (isNaN(doc.rating) || typeof doc.description === 'undefined') {
-        
+
           //return;
         }
 

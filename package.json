@@ -1,10 +1,10 @@
 {
   "dependencies": {
+    "async": "^0.2.10",
     "npm2es": "~0.4.2",
-    "split": "^0.3.0",
     "optimist": "~0.6.0",
-    "skateboard": "^0.2.8",
     "request": "~2.30.0",
-    "async": "^0.2.10"
+    "skateboard": "^1.0.0",
+    "split": "^0.3.0"
   }
 }
