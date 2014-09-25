@@ -218,7 +218,7 @@ skateboard(function(stream) {
         return '"' + word + '"'
       }
       return word;
-    }).filter(Boolean).join('');
+    }).filter(Boolean).join(' ');
 
     var data = JSON.stringify({
         type: 'search',
