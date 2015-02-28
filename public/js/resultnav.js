@@ -1,3 +1,5 @@
+var picoModal = require('./picoModal');
+
 var i = 0,
     modal,
     parentEl = document.getElementById("results");

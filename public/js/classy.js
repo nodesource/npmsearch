@@ -1,4 +1,4 @@
-window.classy = {
+module.exports = {
   add : function(el, name) {
     var existing = el.className.split(' ');
 

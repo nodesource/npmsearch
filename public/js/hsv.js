@@ -1,3 +1,5 @@
+module.exports = ratingColor;
+
 /**
 * Converts an RGB color value to HSV. Conversion formula
 * adapted from http://en.wikipedia.org/wiki/HSV_color_space.
