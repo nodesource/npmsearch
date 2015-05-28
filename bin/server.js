@@ -62,7 +62,7 @@ fn && fn({});
 };
 
 var processKeywords = function(currentSearch) {
-  var keywordMatches = currentSearch.match(/(keywords:([a-z0-9, \-_]+))/i);
+  var keywordMatches = currentSearch.match(/(keywords:([a-z0-9, \-_:]+))/i);
 
   if (keywordMatches) {
     var keywords = keywordMatches[2].split(',').map(function(word) {
