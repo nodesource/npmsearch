@@ -10,7 +10,7 @@ var PERPAGE = 20;
 
 var andexp = /&&?| and /ig;
 
-var findAnd = function(term) {
+function findAnd(term) {
   return term.replace(andexp, ' AND ').replace(/  /g, ' ').trim()
 };
 
@@ -48,6 +48,13 @@ var runSearch = function(client, term, start, rows, fn) {
         start: start,
         docs : json.hits.hits.map(function(hit) {
           hit.fields.highlight = hit.highlight;
+          var fields = hit.fields;
+          for (var key in fields) {
+            if (Array.isArray(fields[key])) {
+              fields[key] = fields[key].toString()
+            }
+          }
+
           return hit.fields;
         })
       }
