@@ -197,7 +197,7 @@ function collect(project) {
 
   // Metrics: Readme
   if (project.readme) {
-    if (!project.readme || 
+    if (!project.readme ||
         project.readme === "ERROR: No README.md file found!" ||
         project.readme.length < 300)
     {
@@ -334,21 +334,38 @@ function stats() {
 // Phase 4: store in es
 function store(array) {
   console.log(globalMetrics);
-  // TODO: use the bulk update api
-  async.eachSeries(array, function(update, fn) {
-    request.post({
-      url: argv.es + "/package/" + update.id + '/_update',
-      json : {
-        doc : {
-          rating : update.rating
-        }
-      }
-    }, function(e, r, o) {
-      fn(e);
-    })
 
-  }, function(e) {
-    console.log('done!');
+  var stream = request.post(
+    argv.es + '/package/_bulk'
+  );
+
+  array.forEach(function(update) {
+    if (!update) {
+      return;
+    }
+
+    console.log('update %s with rating %s', update.id, update.rating);
+
+    stream.write(JSON.stringify({
+      update : {
+        _id: update.id,
+        _type: 'registry',
+        _index: 'package',
+        _retry_on_conflict: 3
+      }
+    }) + '\n');
+
+    stream.write(JSON.stringify({
+      doc: {
+        rating: update.rating
+      }
+    }) + '\n');
+  });
+
+
+  stream.end();
+  stream.on('end', function(e) {
+    console.log('done!', e);
     setTimeout(recompute, (argv.interval || 30)*1000*60);
   });
 }
