@@ -10,5 +10,8 @@
     "skateboard": "^1.0.0",
     "split": "^0.3.0",
     "weld": "^0.2.2"
+  },
+  "devDependencies": {
+    "tape": "^4.0.0"
   }
 }
