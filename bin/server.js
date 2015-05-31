@@ -5,36 +5,34 @@ var request = require('request');
 var net = require('net');
 var split = require('split');
 
-
 var PERPAGE = 20;
 
-var andexp = /&&?| and /ig;
+function arrayToString(value) {
+  if (Array.isArray(value)) {
+    return value.toString();
+  }
+}
 
-function findAnd(term) {
-  return term.replace(andexp, ' AND ').replace(/  /g, ' ').trim()
-};
-
-var runSearch = function(client, term, start, rows, fn) {
+var runSearch = function(client, search, start, rows, fn) {
   var url =  argv.es + '/_search?pretty=false&size=' + rows + '&from=' + start;
-  term = findAnd(term);
-  console.log('runsearch', term, start, rows, url);
-  request.get({
-    url: url,
-    json: {
-      fields: ['name','description','keywords','author','modified','homepage','version','license','rating'],
-      query: {
-        query_string : {
-          query : term,
-          fields: ['name^4', 'description'],
-        }
-      },
-      sort: [{'rating' : "desc"}],
-      highlight: {
-        fields: {
-          description : {}
-        }
+
+  console.log('runsearch', search, start, rows, url);
+
+  var terms = [];
+  var body = {
+    fields: ['name','description','keywords','author','modified','homepage','version','license','rating'],
+    query: search,
+    sort: [{'rating' : "desc"}],
+    highlight: {
+      fields: {
+        description : {}
       }
     }
+  };
+
+  request.get({
+    url: url,
+    json: body
   }, function(e, r, json) {
     if (e || !json || !json.hits) {
       console.log('WTF: runsearch', e, json);
@@ -50,7 +48,7 @@ var runSearch = function(client, term, start, rows, fn) {
           hit.fields.highlight = hit.highlight;
           var fields = hit.fields;
           for (var key in fields) {
-            if (Array.isArray(fields[key])) {
+            if (Array.isArray(fields[key]) && key !== 'keywords') {
               fields[key] = fields[key].toString()
             }
           }
@@ -65,22 +63,7 @@ var runSearch = function(client, term, start, rows, fn) {
     fn && fn(null, out);
   });
 
-fn && fn({});
-};
-
-var processKeywords = function(currentSearch) {
-  var keywordMatches = currentSearch.match(/(keywords:([a-z0-9, \-_:]+))/i);
-
-  if (keywordMatches) {
-    var keywords = keywordMatches[2].split(',').map(function(word) {
-      return 'keywords:'+ word
-    });
-    currentSearch = currentSearch.replace(
-      keywordMatches[1],
-      keywords.join(' AND ')
-    );
-  }
-  return currentSearch
+  fn && fn({});
 };
 
 var handleClient = function(client) {
@@ -89,12 +72,12 @@ var handleClient = function(client) {
     try {
       var obj = JSON.parse(d);
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       client.writable && client.write('{}\n');
       return;
     }
-    currentSearch = processKeywords(obj.value || '');
-    console.log('search!', d);
+    currentSearch = obj.value || '';
+
     runSearch(client, currentSearch, obj.start || 0, obj.perpage || PERPAGE, function(e, json) {
       if (!e && json.response) {
         currentMax = json.response.numFound;

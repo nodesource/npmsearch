@@ -4,6 +4,7 @@ var weld = require('weld').weld;
 var skateboard = require('skateboard');
 var ratingColor = require('./hsv');
 var escapeHTML = require('escape-html');
+var searchParser = require('lucene-query-parser').parse;
 var PERPAGE = 20;
 var MAX_DESCRIPTION_CHARS = 255;
 
@@ -32,7 +33,11 @@ var xssConfig = {
                                  // to filter out its content
 }
 
+var andexp = /&&?| and /ig;
 
+function findAnd(term) {
+  return term.replace(andexp, ' AND ').replace(/  /g, ' ').trim()
+};
 
 function replaceTag(tag) {
     return tagsToReplace[tag] || tag;
@@ -137,14 +142,101 @@ var applyQtoInput = function() {
 
 applyQtoInput();
 
+
+var termCleanupExp = /\s*,\s*/g;
+
+
+function addTerm(obj) {
+  var term = obj.term;
+  term = term.replace(termCleanupExp, ',')
+             .replace(/__COLON__/g, ':')
+
+  if (obj.field && obj.field !== '<implicit>') {
+    var terms = {};
+    terms[obj.field] = term.split(',').map(function(t) {
+      return t.replace(/__DASH__/g, '-');
+    });
+
+    return  {
+      terms : terms
+    };
+  } else {
+
+    if (term.indexOf('*') > -1) {
+
+      return {
+
+      }
+
+    } else {
+      return  {
+        query_string : {
+          query : term,
+          fields: ['name^4', 'description'],
+        }
+      };
+    }
+  }
+}
+
+function addBoolean(ast) {
+  if (!ast.operator) {
+    return addTerm(ast);
+  }
+
+  var b = {};
+  var ret = {};
+  ret.bool = b;
+
+
+  var type = ast.operator === 'AND' ? 'must' : 'should'
+
+  var right = ast.right;
+  var left = ast.left;
+
+  b[type] = [];
+
+  if (right.operator) {
+    b[type].push(addBoolean(right));
+  } else {
+    b[type].push(addTerm(right))
+  }
+
+  if (left.operator) {
+    b[type].push(addBoolean(left));
+  } else {
+    b[type].push(addTerm(left));
+  }
+
+  return ret;
+}
+
 skateboard(function(stream) {
   var searching = false;
-  var search = function(skip) {
+  var query;
+  function search(skip) {
 
-    var val = input.value.trim(),
+    var val = findAnd(input.value.trim());
+    var v = val.replace(/(\w)-(\w)/g, '$1__DASH__$2');
+    v = v.replace(/([:,])(\w*):(\w*)/g, '$1$2__COLON__$3')
     found = false,
     newVal = '',
     i = 0;
+
+    try {
+      query = null;
+      var parsed = searchParser(v);
+
+      if (parsed.operator) {
+        query = addBoolean(parsed);
+      } else if (parsed.left) {
+        query = addBoolean(parsed.left);
+      } else {
+        val = '';
+      }
+    } catch (e) {
+      val = '';
+    };
 
     ga('set', 'page', '/?q=' + val);
     ga('send', 'pageview');
@@ -198,7 +290,7 @@ skateboard(function(stream) {
 
     var data = JSON.stringify({
         type: 'search',
-        value: val,
+        value: query,
         start: 0,
         perpage: PERPAGE
       });
@@ -320,7 +412,6 @@ skateboard(function(stream) {
 
   window.onscroll =  function(e) {
     if (document.body.clientHeight - 150*(PERPAGE/2) < window.pageYOffset && input.value.length) {
-
       if (loading || position >= max) {
         return;
       }
@@ -329,7 +420,7 @@ skateboard(function(stream) {
 
       stream.write(JSON.stringify({
         type: 'search',
-        value: input.value,
+        value: query,
         start: position,
         rows: PERPAGE
       }) + '\n');
