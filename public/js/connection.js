@@ -168,7 +168,7 @@ function addTerm(obj) {
     return  {
       query_string : {
         query : term.replace(/__DASH__/g, '-'),
-        default_field: 'untouched',
+        default_field: 'name',
         analyze_wildcard: true,
         fields: ['name^4', 'description'],
       }
