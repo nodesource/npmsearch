@@ -153,59 +153,60 @@ function addTerm(obj) {
 
   if (obj.field && obj.field !== '<implicit>') {
     var terms = {};
-    terms[obj.field] = term.split(',').map(function(t) {
+    terms[obj.field] = term.split('__COMMA__').map(function(t) {
       return t.replace(/__DASH__/g, '-');
     });
+
+    // ensure keywords:x,y,z is treated like
+    // x AND y AND z
+    terms.minimum_should_match = terms[obj.field].length;
 
     return  {
       terms : terms
     };
   } else {
-
-    if (term.indexOf('*') > -1) {
-
-      return {
-
+    return  {
+      query_string : {
+        query : term.replace(/__DASH__/g, '-'),
+        default_field: 'untouched',
+        analyze_wildcard: true,
+        fields: ['name^4', 'description'],
       }
-
-    } else {
-      return  {
-        query_string : {
-          query : term,
-          fields: ['name^4', 'description'],
-        }
-      };
-    }
+    };
   }
 }
 
 function addBoolean(ast) {
-  if (!ast.operator) {
-    return addTerm(ast);
-  }
 
-  var b = {};
   var ret = {};
-  ret.bool = b;
 
 
-  var type = ast.operator === 'AND' ? 'must' : 'should'
-
-  var right = ast.right;
-  var left = ast.left;
-
-  b[type] = [];
-
-  if (right.operator) {
-    b[type].push(addBoolean(right));
+  if (!ast.operator) {
+    ret = addTerm(ast);
   } else {
-    b[type].push(addTerm(right))
-  }
 
-  if (left.operator) {
-    b[type].push(addBoolean(left));
-  } else {
-    b[type].push(addTerm(left));
+    var b = {};
+    ret.bool = b;
+
+
+    var type = ast.operator === 'AND' ? 'must' : 'should'
+
+    var right = ast.right;
+    var left = ast.left;
+
+    b[type] = [];
+
+    if (right.operator) {
+      b[type].push(addBoolean(right));
+    } else {
+      b[type].push(addTerm(right))
+    }
+
+    if (left.operator) {
+      b[type].push(addBoolean(left));
+    } else {
+      b[type].push(addTerm(left));
+    }
   }
 
   return ret;
@@ -217,8 +218,10 @@ skateboard(function(stream) {
   function search(skip) {
 
     var val = findAnd(input.value.trim());
-    var v = val.replace(/(\w)-(\w)/g, '$1__DASH__$2');
+    var v = val.replace(/([\w\*])-([\w\*])/g, '$1__DASH__$2');
     v = v.replace(/([:,])(\w*):(\w*)/g, '$1$2__COLON__$3')
+    v = v.replace(/([:,])(\w*),(\w*)/g, '$1$2__COMMA__$3')
+
     found = false,
     newVal = '',
     i = 0;
@@ -238,8 +241,8 @@ skateboard(function(stream) {
       val = '';
     };
 
-    ga('set', 'page', '/?q=' + val);
-    ga('send', 'pageview');
+    ga && ga('set', 'page', '/?q=' + val);
+    ga && ga('send', 'pageview');
 
     // clean input to detect true changes
     for (i = 0; i < val.length; i++){
