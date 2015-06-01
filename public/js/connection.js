@@ -165,9 +165,9 @@ function addTerm(obj) {
       terms : terms
     };
   } else {
-    return  {
+    return {
       query_string : {
-        query : term.replace(/__DASH__/g, '-'),
+        query : JSON.stringify(term.replace(/__DASH__/g, '-')),
         default_field: 'name',
         analyze_wildcard: true,
         fields: ['name^4', 'description'],
@@ -179,7 +179,6 @@ function addTerm(obj) {
 function addBoolean(ast) {
 
   var ret = {};
-
 
   if (!ast.operator) {
     ret = addTerm(ast);
