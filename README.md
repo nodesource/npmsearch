@@ -20,10 +20,10 @@ cat mappings.json | curl -v -XPOST http://localhost:9200/my-index-name/package/_
 
 # setup an alias to 'registry'
 
-curl -XPOST 'http://tmpvar-mini.local:9200/_aliases' -d '
+curl -XPOST 'http://localhost:9201/_aliases' -d '
 {
   "actions" : [
-    { "add" : { "index" : "better-mapping", "alias" : "registry" } }
+    { "add" : { "index" : "my-index-name", "alias" : "registry" } }
   ]
 }'
 
