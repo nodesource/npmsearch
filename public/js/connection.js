@@ -72,6 +72,7 @@ var templateResults = function(results) {
       if (e.tagName === 'A') {
         switch (k) {
           case 'homepage':
+            e.target = '_blank';
             e.href = v;
           break;
 
