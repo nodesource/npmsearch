@@ -47,3 +47,7 @@ node bin/server.js --es="http://localhost:9200/registry"
 ```
 node bin/rating.js --es="http://localhost:9200/registry"
 ```
+
+# License
+
+[MIT](LICENSE.txt)

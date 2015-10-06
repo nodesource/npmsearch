@@ -1,4 +1,7 @@
 {
+  "name": "npmsearch.com",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "version": "1.0.0",
   "scripts" : {
     "bundle" : "browserify --entry public/js/index.js | uglifyjs   > public/js/bundle.js",
     "dev" : "watchify --entry public/js/index.js -o public/js/bundle.js"
