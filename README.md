@@ -1,5 +1,7 @@
 # npmsearch.com
 
+[![Join the chat at https://gitter.im/solids/npmsearch](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/solids/npmsearch?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This is the code that powers [npmsearch.com](http://npmsearch.com), which provides a clean interface to searching pseudo-rated node packages from npm.
 
 The rest of this document describes how you would get your own npmsearch up and running.
