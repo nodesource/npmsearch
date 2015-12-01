@@ -23,7 +23,7 @@ curl "http://npmsearch.com/query?q=dom&fields=name"
 * __description__
 * __devDependencies__
 * __homepage__
-* __id__
+* __keywords__
 * __maintainers__
 * __modified__
 * __name__
