@@ -4,7 +4,37 @@
 
 This is the code that powers [npmsearch.com](http://npmsearch.com), which provides a clean interface to searching pseudo-rated node packages from npm.
 
-The rest of this document describes how you would get your own npmsearch up and running.
+## api
+
+To query the npmsearch index, you can use the HTTP api which is effectively a proxy to elasticsearch's [URI Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-uri-request.html).
+
+All requests go through http://npmsearch.com/query. Here's an example:
+
+```
+curl "http://npmsearch.com/query?q=dom&fields=name"
+{"results":[{"name":["select-dom"]},{"name":["dom-manipulations"]},{"name":["zero-dom"]},{"name":["dom-stub"]},{"name":["dom-walk"]},{"name":["dom-value"]},{"name":["karma-chai-dom"]},{"name":["dom-select"]},{"name":["dom-listeners"]},{"name":["has-dom"]}],"total":7265,"from":0}
+```
+
+### Available fields
+
+* __author__
+* __created__
+* __dependencies__
+* __description__
+* __devDependencies__
+* __homepage__
+* __id__
+* __maintainers__
+* __modified__
+* __name__
+* __readme__
+* __repository__
+* __scripts__
+* __times__
+* __version__
+* __rating__ - computed rating as per [bin/rating.js](bin/rating.js)
+
+# Running your own npmsearch
 
 ## Setup Elasticsearch
 
