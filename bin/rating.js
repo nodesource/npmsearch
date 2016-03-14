@@ -101,7 +101,7 @@ function collect(project) {
 
 
   if (!project || project.error) {
-    console.log('FAIL', project.name);
+    console.log('FAIL', project && project.name || "UNKNOWN PROJECT");
     return;
   }
 
