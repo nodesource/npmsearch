@@ -2,17 +2,21 @@
   "name": "npmsearch.com",
   "license": "SEE LICENSE IN LICENSE.txt",
   "version": "1.0.0",
-  "scripts" : {
-    "bundle" : "browserify --entry public/js/index.js | uglifyjs   > public/js/bundle.js",
-    "dev" : "watchify --entry public/js/index.js -o public/js/bundle.js"
+  "scripts": {
+    "bundle": "browserify --entry public/js/index.js | uglifyjs   > public/js/bundle.js",
+    "dev": "watchify --entry public/js/index.js -o public/js/bundle.js"
   },
   "dependencies": {
     "async": "^0.2.10",
     "npm2es": "~0.4.2",
     "optimist": "~0.6.0",
     "request": "~2.30.0",
-    "skateboard": "^1.0.0",
+    "skateboard": "^1.5.1",
     "split": "^0.3.0",
     "weld": "^0.2.2"
+  },
+  "devDependencies": {
+    "escape-html": "^1.0.3",
+    "lucene-query-parser": "^1.0.1"
   }
 }
