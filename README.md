@@ -80,6 +80,14 @@ node bin/server.js --es="http://localhost:9200/registry"
 node bin/rating.js --es="http://localhost:9200/registry"
 ```
 
-# License
+## Authors and Contributors
 
-[MIT](LICENSE.txt)
+<table><tbody>
+<tr><th align="left">Elijah Insua</th><td><a href="https://github.com/tmpvar">GitHub/tmpvar</a></td><td><a href="http://twitter.com/tmpvar">Twitter/@tmpvar</a></td></tr>
+</tbody></table>
+
+Authored by Elijah Insua. Contributions are welcomed from anyone wanting to improve this project!
+
+## License & Copyright
+
+**npmsearch** is Copyright (c) 2016 NodeSource and licensed under the MIT license. All rights not explicitly granted in the MIT license are reserved. See the included [LICENSE.txt](LICENSE.txt) file for more details.
