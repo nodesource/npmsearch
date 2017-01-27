@@ -4,76 +4,72 @@
     <title>npmsearch - node.js Package Search Utility</title>
     <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="npm" />
     <script type="text/javascript" src="/js/prefixfree.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,300i,400,600|Source+Code+Pro" rel="stylesheet">
     <link type="text/css" rel="stylesheet" media="all" href="core.css" />
-
-    <script type="text/javascript" src="//use.typekit.net/skf0vvy.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
   </head>
   <body>
+  <div class="main-content">
     <header>
-
-      <a href="https://twitter.com/npmsearch" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @npmsearch</a>
-      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
-      <section id="search">
+      <section id="heading">
         <h1>npm</h1>
-        <input type="text" name="search" tabindex="0" />
       </section>
     </header>
 
-    <section id="result-container" style="display:none">
-      <ul id="results">
-        <li class="result">
-          <div class="rating"><div class="num">9.8</div></div>
-          <h2 class="name">
-            <a class="homepage" href="">Untitled Project</a>
-          </h2>
-          <span class="version">unknown</span>
-          <span class="timestamp-separator"> by </span>
-          <a class="author" href="?q=author:unknown">unknown</a>
-          <span class="timestamp-separator"> ~ </span>
-          <span class="timestamp">unknown</span>
-          <p class="description"></p>
-          <ul class="keywords">
-            <li class="keyword"><a href="" class="text"></a></li>
-          </ul>
-          <ul class="licenses">
-            <li class="license">??</li>
-          </ul>
-        </li>
-      </ul>
-      <div id="searching"><img src="images/spinner.gif" /></div>
-    </section>
+      <section id="search">
+        <h2>Search for Node Packages on the npm Registry</h2>
+        <div class="search blank">
+          <input type="text" name="search" placeholder="Search Packages" tabindex="0" />
+        </div>
+      </section>
 
-    <section id="intro">
-      <p>
-        Search for node packages on the npm registry
-      </p>
-      <p>
-        Example searches:
-        <ul>
-          <li><a href="?q=request">request</a></li>
-          <li><a href="?q=author:substack">author:substack</a></li>
-          <li><a href="?q=keywords:leveldb,voxel">keywords:leveldb,voxel</a></li>
+      <section id="result-container" style="display:none">
+
+        <ul id="results">
+          <li class="result">
+            <div class="rating"><div class="num">9.8</div></div>
+            <h2 class="name">
+              <a class="homepage" href="">Untitled Project</a>
+            </h2>
+            <span class="version">unknown</span>
+            <span class="timestamp-separator"> by </span>
+            <a class="author" href="?q=author:unknown">unknown</a>
+            <span class="timestamp-separator"> ~ </span>
+            <span class="timestamp">unknown</span>
+            <p class="description"></p>
+            <ul class="keywords">
+              <li class="keyword"><a href="" class="text"></a></li>
+            </ul>
+            <ul class="licenses">
+              <li class="license">??</li>
+            </ul>
+          </li>
         </ul>
-      </p>
+        <div id="searching"><img src="images/spinner.gif" /></div>
+      </section>
 
-      <p>
-        Ratings are based on a number of metrics including:
-        <ul>
-          <li>number of stars</li>
-          <li>number of dependents</li>
-          <li>release frequency</li>
-          <li>existence of tests/readme/etc..</li>
-        </ul>
-      </p>
-    </section>
-
-    <footer>
-      <span id="copyright">
-        <p>built by <a href="http://solids.io">solids</a> - (see on <a href="https://github.com/solids/npmsearch">GitHub</a>)</p>
-      </span>
-   </footer>
+      <section id="intro">
+        <div class="examples">
+          <h3 class="semi-bold top">Example Queries:</h3>
+          <div class="example-query name">
+            <a href="?q=express" class="query">"express"</a>
+            <p class="description">Search by Package Name</p>
+          </div>
+          <div class="example-query author">
+            <a href="?q=author:substack" class="query">"author:substack"</a>
+            <p class="description">Search by Package Author</p>
+          </div>
+          <div class="example-query keyword">
+            <a href="?q=keywords:leveldb,voxel" class="query">"keywords:leveldb,voxer"</a>
+            <p class="description">Search by Keywords</p>
+          </div>
+        </div>
+      </section>
+      <footer>
+        <span id="copyright">
+          <p>Powered By Nodesource</p>
+        </span>
+     </footer>
+    </div>
 
     <script type="text/javascript" src="/js/bundle.js"></script>
 
