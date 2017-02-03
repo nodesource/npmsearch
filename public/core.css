@@ -27,15 +27,15 @@ h3.top {
   flex-direction: column;
 }
 
-.typekit-badge {
-  display:none !important;
-}
-
 body {
   margin: 0;
   padding: 0;
-  /*min-width: 1100px;*/
   background: #fff;
+}
+
+hr {
+  margin: 0;
+  border: 1px solid #e1e7e6;
 }
 
 header {
@@ -467,8 +467,50 @@ section#intro {
   flex-grow: 1;
 }
 
-.twitter-follow-button {
-  position:absolute;
-  right: 1%;
-  color: #6DD9F9;
+/* About Page */
+.about #main-copy {
+  padding: 40px;
+  color: #4c5859;
+}
+
+.about #main-copy h1 {
+  font-size: 36px;
+  font-weight: 300;
+  margin-top: 0;
+}
+
+.about #main-copy h2 {
+  margin-top: 60px;
+  margin-bottom: 0;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.about #main-copy a {
+  text-decoration: none;
+  color: #3fa4ff;
+}
+
+.about #main-copy p {
+  max-width: 650px;
+  font-size: 20px;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+.about #main-copy ul {
+  max-width: 650px;
+  line-height: 1.6;
+  color: #4c5859;
+  padding-left: 14px;
+}
+
+.about #main-copy ul li {
+  font-size: 14px;
+}
+
+.about #main-copy ul li span {
+  font-size: 20px;
 }
