@@ -131,4 +131,6 @@ function ratingColor(el, rating) {
   */
   hsv[1] = .55;
   el.style.color = el.style.borderColor = 'rgb(' + hsvToRgb(hsv).map(replace).join(',') + ')';
+  el.style.color = el.style.backgroundColor = 'rgb(' + hsvToRgb(hsv).map(replace).join(',') + ')';
+
 }
