@@ -11,18 +11,18 @@
     <div class="main-content">
       <header>
         <section id="heading">
-          <h1>npm</h1>
+          <a href="/"><h1>npm</h1></a>
           <div class="right">
             <div class="nav">
               <a href="/about">About</a>
             </div>
             <div class="nav">
-              <a href="https://github.com/nodesource/npmsearch">
+              <a href="https://github.com/nodesource/npmsearch" target="_blank">
                 <img src="images/github-icon.svg" />
               </a>
             </div>
             <div class="nav">
-              <a href="https://twitter.com/nodesource">
+              <a href="https://twitter.com/nodesource" target="_blank">
                 <img src="images/twitter-icon.svg" />
               </a>
             </div>
@@ -38,8 +38,9 @@
       </section>
 
       <section id="result-container">
-        <table class="list">
+        <table id="result-table" class="list">
           <thead>
+
             <tr>
               <th class="score">
                 <a href="">score</a>
@@ -58,6 +59,11 @@
               </th>
             </tr>
           </thead>
+          <tbody class="total">
+            <tr>
+              <td><span id="total-results"></span> Total Results</td>
+            </tr>
+          </tbody>
           <tbody id="results">
             <tr class="result">
               <td>
@@ -91,6 +97,7 @@
             </tr>
           </tbody>
         </table>
+        <div id="searching"><img src="images/spinner.gif" /></div>
       </section> 
       <section class="intro" id="intro">
         <div class="examples">

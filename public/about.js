@@ -24,18 +24,18 @@ function renderAbout () {
         <div class="main-content about">
           <header>
             <section id="heading">
-              <h1>npm</h1>
+              <a href="/"><h1>npm</h1></a>
               <div class="right">
                 <div class="nav">
                   <a href="/about">About</a>
                 </div>
                 <div class="nav">
-                  <a href="https://github.com/nodesource/npmsearch">
+                  <a href="https://github.com/nodesource/npmsearch" target="_blank">
                     <img src="images/github-icon.svg" />
                   </a>
                 </div>
                 <div class="nav">
-                  <a href="https://twitter.com/nodesource">
+                  <a href="https://twitter.com/nodesource" target="_blank">
                     <img src="images/twitter-icon.svg" />
                   </a>
                 </div>

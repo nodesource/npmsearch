@@ -67,7 +67,7 @@ header .right .nav {
 #search-header {
   max-height: 35px;
   overflow: hidden;
-  transition: all 700ms ease-out;
+  transition: all 500ms ease-in;
 }
 
 #search {
@@ -83,16 +83,20 @@ header h1 {
   padding: 0 10em .1em 0;
   margin: 0;
   background-image: url('/images/search-icon.svg');
-  background-size: .8em;
+  background-size: 22px;
   background-repeat: no-repeat;
-  background-position: 2.2em 30%;
+  background-position: 61px 52%;
+}
+
+header a {
+  text-decoration: none;
 }
 
 #search-box {
   width: 778px;
   max-width: 69%;
   margin: 25px auto 50px;
-  transition: all 700ms ease-out;
+  transition: all 500ms ease-in;
 }
 
 
@@ -111,12 +115,11 @@ header h1 {
   color: #89a19d;
   padding: 8px;
   font-size: 16px;
-  border-radius: 3px;
-  border:0;
   background: #fff;
   border-radius: 40px;
   border: 1px solid #e1e7e6;
-  padding-left: 40px;
+  padding-left: 35px;
+  background: url("images/small-search.svg") no-repeat scroll 10px 10px;
 }
 
 textarea, input {
@@ -147,7 +150,7 @@ textarea, input {
   border-top: 1px solid #e1e7e6;
   margin: 0;
   text-align: left;
-  padding-left: 12px;
+  padding-left: 20px;
   font-size: 12px;
   letter-spacing: 2px;
   color: #89a19d;
@@ -161,18 +164,6 @@ textarea, input {
   color: #89a19d;
 }
 
-#result-container table thead th:first-child {
-  border-left: 1px solid var(--color-light2);
-  border-radius: 2px 0 0 2px;
-  background-color: var(--color-light3);
-  padding-left: 20px;
-}
-
-#result-container table thead th.score {
-  display: flex;
-  align-items: center;
-}
-
 #result-container table thead th.score img {
   margin-left: 5px;
 }
@@ -181,23 +172,30 @@ textarea, input {
   width: 500px;
 }
 
-#result-container table thead th:last-child {
-  border-right: 1px solid var(--color-light2);
-  border-radius: 0 2px 2px 0;
-}
-
 #result-container table tbody tr {
   border-bottom: 1px solid #e1e7e6;
 }
 
 #result-container table tbody td {
-  border-bottom: 1px solid var(--color-light2);
+  border-bottom: 1px solid #e1e7e6;
   height: 80px;
-  padding-left: 12px;
+  padding-left: 20px;
   padding-bottom: 30px;
   font-family: 'Source Sans Pro';
   font-size: 16px;
   color: #4c5859;
+}
+
+#result-container table tbody.total td,
+#result-container table tbody.total tr {
+  border-bottom: none;
+  height: 0px;
+  padding-bottom: 0;
+  padding-top: 20px;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #89a19d;
 }
 
 table tbody td  a.homepage {
@@ -262,18 +260,6 @@ table tbody td a.author {
   color: white;
 }
 
-#result-container table tbody td.score.score_good .badge {
-  background-color: var(--color-green);
-}
-
-#result-container table tbody td.score.score_ok .badge {
-  background-color: var(--color-warning);
-}
-
-#result-container table tbody td.score.score_bad .badge {
-  background-color: var(--color-error);
-}
-
 #result-container table tbody td.score .badge span {
   height: 100%;
   line-height: 30px;
@@ -333,6 +319,10 @@ li.result#selected {
 
 body.searching #searching {
   display:block;
+}
+
+body.searching #result-table {
+  display: none;
 }
 
 div.rating div.num {

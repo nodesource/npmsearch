@@ -352,6 +352,8 @@ skateboard(function(stream) {
       max = obj.response.numFound;
       position = obj.response.start+PERPAGE;
 
+      document.getElementById('total-results').innerHTML = max
+
       var results = [];
       obj.response.docs.forEach(function(doc) {
         if (typeof doc.rating === 'undefined') {
