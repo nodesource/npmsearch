@@ -6,7 +6,7 @@ var net = require('net');
 var split = require('split');
 
 var PERPAGE = 20;
-
+var ES = argv.es || process.env.ES
 function arrayToString(value) {
   if (Array.isArray(value)) {
     return value.toString();
@@ -14,7 +14,7 @@ function arrayToString(value) {
 }
 
 var runSearch = function(client, search, start, rows, fn) {
-  var url =  argv.es + '/_search?pretty=false&size=' + rows + '&from=' + start;
+  var url =  ES + '/_search?pretty=false&size=' + rows + '&from=' + start;
 
   console.log('runsearch', search, start, rows, url);
 
