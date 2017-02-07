@@ -2,7 +2,7 @@ var classy = require('./classy');
 var prettyDate = require('./pretty-date');
 var weld = require('weld').weld;
 var skateboard = require('skateboard');
-var ratingColor = require('./hsv');
+var scoreColor = require('./score-color');
 var escapeHTML = require('escape-html');
 var searchParser = require('lucene-query-parser').parse;
 var PERPAGE = 20;
@@ -56,11 +56,11 @@ var templateResults = function(results) {
     map : function(p, e, k, v) {
       var where = e;
 
-      if (k === 'rating') {
-        ratingColor(e.parentNode, parseFloat(v));
+      if (k === 'score') {
+        scoreColor(e.parentNode, parseFloat(v));
       }
 
-      if (k === 'modified') {
+      if (k === 'times.published') {
         if (!isNaN(v)) {
           v = prettyDate(v) || v;
         } else {
@@ -106,8 +106,8 @@ var templateResults = function(results) {
       return false;
     },
     alias : {
-      modified : 'timestamp',
-      rating   : 'num',
+      'times.published' : 'timestamp',
+      score : 'num',
       devDependencies: false,
       maintainers: false,
       users: false
@@ -356,11 +356,11 @@ skateboard(function(stream) {
 
       var results = [];
       obj.response.docs.forEach(function(doc) {
-        if (typeof doc.rating === 'undefined') {
-          doc.rating = 0.0;
+        if (typeof doc.score === 'undefined') {
+          doc.score = 0.0;
         }
 
-        if (isNaN(doc.rating) || typeof doc.description === 'undefined') {
+        if (isNaN(doc.score) || typeof doc.description === 'undefined') {
 
           //return;
         }
@@ -388,7 +388,7 @@ skateboard(function(stream) {
           doc.keywords = false;
         }
 
-        doc.modified = +(new Date(doc.modified));
+        doc['times.published'] = +(new Date(doc['times.published']));
         doc.license = doc.license || '??';
         doc.homepage = doc.homepage || 'http://npmjs.com/package/' + doc.name;
 
@@ -398,12 +398,12 @@ skateboard(function(stream) {
 
         doc.homepage = doc.homepage.replace(/git@github.com:?/, 'https://github.com/');
 
-        if (isNaN(doc.rating)) {
+        if (isNaN(doc.score)) {
           //return;
-        } else if (doc.rating >= 9.95) {
-          doc.rating = '10';
+        } else if (doc.score >= 99.9) {
+          doc.score = '10';
         } else {
-          doc.rating = Number(doc.rating).toFixed(1);
+          doc.score = Number(doc.score/10).toFixed(1);
         }
         results.push(doc);
       });

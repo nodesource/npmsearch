@@ -20,9 +20,9 @@ var runSearch = function(client, search, start, rows, fn) {
 
   var terms = [];
   var body = {
-    fields: ['name','description','keywords','author','modified','homepage','version','license','rating'],
+    fields: ['name','description','keywords','author','times.published','homepage','version','license','score'],
     query: search,
-    sort: [{'rating' : "desc"}],
+    sort: [{'score' : "desc"}],
     highlight: {
       fields: {
         description : {}
