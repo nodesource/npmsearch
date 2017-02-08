@@ -157,18 +157,14 @@ function addTerm(obj) {
              .replace(/__COLON__/g, ':')
 
   if (obj.field && obj.field !== '<implicit>') {
-    var terms = {};
-    terms[obj.field] = term.split('__COMMA__').map(function(t) {
-      return t.replace(/__DASH__/g, '-');
+    return terms = term.split('__COMMA__').map(function(t) {
+      var v = t.replace(/__DASH__/g, '-');
+      var k = obj.field;
+      var tmpObj = {};
+      tmpObj[k] = v
+      return {term: tmpObj};
     });
 
-    // ensure keywords:x,y,z is treated like
-    // x AND y AND z
-    terms.minimum_should_match = terms[obj.field].length;
-
-    return  {
-      terms : terms
-    };
   } else {
     return {
       query_string : {
@@ -184,14 +180,14 @@ function addTerm(obj) {
 function addBoolean(ast) {
 
   var ret = {};
+  var b = {};
+  ret.bool = b;
 
   if (!ast.operator) {
-    ret = addTerm(ast);
+    // add terms to bool query if they are the only term
+    b['must'] = [];
+    b['must'].push(addTerm(ast));
   } else {
-
-    var b = {};
-    ret.bool = b;
-
 
     var type = ast.operator === 'AND' ? 'must' : 'should'
 

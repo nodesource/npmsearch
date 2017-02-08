@@ -12618,8 +12618,6 @@ var templateResults = function(results) {
       var where = e;
 
       if (k === 'score') {
-        console.log(e.parentNode)
-        console.log(v)
         scoreColor(e.parentNode, parseFloat(v));
       }
 
@@ -12720,18 +12718,14 @@ function addTerm(obj) {
              .replace(/__COLON__/g, ':')
 
   if (obj.field && obj.field !== '<implicit>') {
-    var terms = {};
-    terms[obj.field] = term.split('__COMMA__').map(function(t) {
-      return t.replace(/__DASH__/g, '-');
+    return terms = term.split('__COMMA__').map(function(t) {
+      var v = t.replace(/__DASH__/g, '-');
+      var k = obj.field;
+      var tmpObj = {};
+      tmpObj[k] = v
+      return {term: tmpObj};
     });
 
-    // ensure keywords:x,y,z is treated like
-    // x AND y AND z
-    terms.minimum_should_match = terms[obj.field].length;
-
-    return  {
-      terms : terms
-    };
   } else {
     return {
       query_string : {
@@ -12747,14 +12741,14 @@ function addTerm(obj) {
 function addBoolean(ast) {
 
   var ret = {};
+  var b = {};
+  ret.bool = b;
 
   if (!ast.operator) {
-    ret = addTerm(ast);
+    // add terms to bool query if they are the only term
+    b['must'] = [];
+    b['must'].push(addTerm(ast));
   } else {
-
-    var b = {};
-    ret.bool = b;
-
 
     var type = ast.operator === 'AND' ? 'must' : 'should'
 
@@ -12964,7 +12958,6 @@ skateboard(function(stream) {
         if (isNaN(doc.score)) {
           //return;
         } else if (doc.score >= 99.9) {
-          console.log(doc.score)
           doc.score = '10';
         } else {
           doc.score = Number(doc.score/10).toFixed(1);
@@ -13545,7 +13538,7 @@ function donkey(event) {
 },{"./picoModal":70}],73:[function(require,module,exports){
 module.exports = scoreColor
 
-
+// Assigns appropriate color to score badge
 const certified = '#5ac878'
 const ok = '#ffb726'
 const bad = '#ff6040'
