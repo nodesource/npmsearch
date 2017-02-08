@@ -94,7 +94,7 @@ var templateResults = function(results) {
         }
         where.textContent = v;
       } else if (k === 'keywords') {
-        e.innerHTML = "<li class='keyword'>No Tags \u{1F643}</li>"
+        e.innerHTML = "<li class='keyword'>No Tags</li>"
       } else {
         e.style.display = 'none'
       }
