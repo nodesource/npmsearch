@@ -48,10 +48,10 @@ function renderAbout () {
             <h1>About</h1>
             <h2>Nodesource Certification Score</h2>
             <p>
-              npmsearch uses The NodeSource Certification Process, an extensive suite of
-              tests based on attributes that are valuable to customers. We are attempting
-              to capture the best signals that determine the quality, security and overall
-              health of any given package in the npm ecosystem.
+              npmsearch uses The <a href="https://nodesource.com/" target="_blank">NodeSource</a>
+              Certification Process, an extensive suite of tests based on attributes that are valuable
+              to customers. We are attempting to capture the best signals that determine the quality,
+              security and overall health of any given package in the npm ecosystem.
             </p>
             <br />
             <p>
@@ -72,9 +72,10 @@ function renderAbout () {
             </ul>
             <h2>Credits</h2>
             <p>
-              npmsearch is made possible by NodeSource, The Node Company™. NodeSource is the
-              Node Company, offering N|Solid - the most secure platform for running Node.js
-              in production. Trusted by MasterCard, GoPro, Condé Nast and many others, N|Solid
+              npmsearch is made possible by <a href="https://nodesource.com/" target="_blank">NodeSource</a>,
+              The Node Company&trade;. NodeSource is the Node Company, offering N|Solid
+              - the most secure platform for running Node.js in production. 
+              Trusted by MasterCard, GoPro, Cond&eacute; Nast and many others, N|Solid
               secures your applications and provides surgical insight into your Node.js
               processes to help you identify problems before they happen. With a commitment
               to the Node.js community, NodeSource is dedicated to helping build an open,
@@ -86,7 +87,7 @@ function renderAbout () {
           <footer>
             <span id="copyright">
               <p class="powered-by">
-                <span>Powered By</span> <img src="/images/white-logo.svg">
+                <span>Powered By</span> <a href="https://nodesource.com/" target="_blank"><img src="/images/white-logo.svg"></a>
               </p>
             </span>
          </footer>
