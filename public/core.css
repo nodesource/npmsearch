@@ -234,6 +234,7 @@ table tbody td li.keyword {
   margin: 0 10px 0 0;
   list-style: none;
   display: inline-block;
+  color: #d8d8d8;
 }
 
 table tbody td li.keyword a {
@@ -241,6 +242,11 @@ table tbody td li.keyword a {
   text-decoration: none;
   font-size: 12px;
   font-weight: 400;
+  cursor: pointer;
+}
+
+table tbody td li.keyword a:hover {
+  text-decoration: underline;
 }
 
 table tbody td a.author {
