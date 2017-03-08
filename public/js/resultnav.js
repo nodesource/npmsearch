@@ -47,7 +47,6 @@ function donkey(event) {
 
   // handle down
   if (event.keyCode === 40) {
-
     // are there results?
     if (!childCnt) {
       return;
@@ -61,6 +60,7 @@ function donkey(event) {
         max = document.getElementById("results").children.length,
         scrolled = window.pageYOffset+window.innerHeight/2;
 
+    // console.log(min, max, scrolled)
     if (document.querySelector("#selected")) {
       found = document.querySelector("#selected");
       if (found.offsetTop < window.pageYOffset || found.offsetTop > window.pageYOffset+window.innerHeight) {
@@ -68,6 +68,7 @@ function donkey(event) {
         return;
       }
     } else if (window.pageYOffset > window.innerHeight) {
+      console.log('bye')
       findCenterElement(min, max, scrolled);
       return;
     }
@@ -174,25 +175,23 @@ function donkey(event) {
       if (document.querySelector("#keyContainer")) {
         return;
       }
-
       modal = picoModal({
         content: "<div id=\"keyContainer\">" +
-//                 "<h1 id=\"keyHeader\">npm - keybindings</h1>" +
-                 "<div id=\"keyBody\"><p>" +
-                 "<span><em class=\"key\">up</em> - moves result selector up the page.</span>" +
-                 "<span><em class=\"key\">down</em> - moves result selector down the page.</span>" +
-                 "<span><em class=\"key\">up/down</em> - with result selector off screen, this selects the middle result within view.</span>" +
-                 "<span><em class=\"key\">enter</em> - follow the result link and visit the project's homepage.</span>" +
-                 "<span><em class=\"key\">esc</em> - scrolls to and selects the search input, press it again to clear the input.</span>" +
-                 "</p></div>" +
+                 "<div id=\"keyBody\">" +
+                 "<span><div class=\"key\"><img class=\"arrow\" src=\"../images/arrow.svg\"></div> Moves result selector up the page.</span>" +
+                 "<span><div class=\"key\"><img class=\"arrow down\" src=\"../images/arrow.svg\"></div> Moves result selector down the page.</span>" +
+                 "<span><div class=\"key\"><img class=\"arrow\" src=\"../images/arrow.svg\"></div><em class=\"small\">or</em><div class=\"key\"><img class=\"arrow down\" src=\"../images/arrow.svg\"></div> With result selector off screen, this selects the middle result within view.</span>" +
+                 "<span><div class=\"key text\"><em class=\"small\">Enter</em></div> Follow the result link and visit the project's homepage.</span>" +
+                 "<span><div class=\"key text\"><em class=\"small\">Esc</em></div> Scrolls to and selects the search input, press it again to clear the input.</span>" +
+                 "</div>" +
                  "</div>",
         overlayStyles: {
-          backgroundColor: "#000",
-          opacity: .6
+          backgroundColor: "#4C5859",
+          opacity: .9
         },
         modalStyles: {
           left: "0px",
-          top: "50px",
+          top: "111px",
           height: "50px",
           width: "100%",
           padding: "0px",

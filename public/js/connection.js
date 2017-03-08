@@ -125,7 +125,6 @@ var templateResults = function(results) {
 var applyQtoInput = function() {
   document.getElementById('intro').style.display = 'block';
   document.getElementById('search-header').style.height = '35px';
-  document.getElementById('search-box').style.marginBottom = '25px';
   document.getElementById('result-container').style.display = 'none';
 
   if (window.location.search) {
@@ -135,7 +134,6 @@ var applyQtoInput = function() {
       window.title = 'NPMSearch - ' + input.value;
       document.getElementById('intro').style.display = 'none';
       document.getElementById('search-header').style.height = '0';
-      document.getElementById('search-box').style.marginBottom = '25px';
       document.getElementById('result-container').style.display = 'block';
     } else {
       input.value = '';
@@ -266,13 +264,11 @@ skateboard(function(stream) {
 
       document.getElementById('intro').style.display = 'block';
       document.getElementById('search-header').style.height = '35px';
-      document.getElementById('search-box').style.marginBottom = '50px';
       document.getElementById('result-container').style.display = 'none';
     } else {
 
       document.getElementById('intro').style.display = 'none';
       document.getElementById('search-header').style.height = '0';
-      document.getElementById('search-box').style.marginBottom = '25px';
       document.getElementById('result-container').style.display = 'block';
     }
 
@@ -409,7 +405,6 @@ skateboard(function(stream) {
       classy.remove(document.body, 'searching');
       document.getElementById('intro').style.display = 'block';
       document.getElementById('search-header').style.height = '35px';
-      document.getElementById('search-box').style.marginBottom = '50px';
       document.getElementById('result-container').style.display = 'none';
       resultsEl.innerHTML = "";
     }
