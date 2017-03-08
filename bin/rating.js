@@ -6,7 +6,9 @@ var request = require('request'),
     qs = require('querystring'),
     url = require('url');
 
-if (!argv.es) {
+const ES = argv.es || process.env.ES
+
+if (!ES) {
   return console.log('USAGE: node rating3.js --es="http://host:port/npmsearch" [--interval=30]');
 }
 
@@ -56,7 +58,7 @@ function recompute() {
   };
 
   request.get({
-    url: argv.es + '/_search?size=100&scroll=5m&search_type=scan',
+    url: ES + '/_search?size=100&scroll=5m&search_type=scan',
     json: { query : { match_all : {} } },
   }, function(e, r, o) {
     if (e || !o) {
@@ -66,7 +68,7 @@ function recompute() {
     async.whilst(function() {
       return !end;
     }, function(fn) {
-      var parsed = url.parse(argv.es)
+      var parsed = url.parse(ES)
       var scrollBase = url.format({
         host: parsed.host,
         protocol: parsed.protocol
@@ -337,7 +339,7 @@ function store(array) {
   // TODO: use the bulk update api
   async.eachSeries(array, function(update, fn) {
     request.post({
-      url: argv.es + "/package/" + update.id + '/_update',
+      url: ES + "/package/" + update.id + '/_update',
       json : {
         doc : {
           rating : update.rating
