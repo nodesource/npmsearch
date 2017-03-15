@@ -4,11 +4,12 @@ function renderAbout () {
   const criteria = {
     readme: 'Package has a README file',
     sourceControl: 'Package\'s source code is in public source control',
-    license: 'Package has an Apache, BSD, ISC, or MIT LICENSE file',
+    license: 'Package and its dependency tree are open-source licensed with any of: Apache, BSD, ISC, or MIT',
     usage: 'Disk usage after npm install is < 25 MB',
+    // tests and coverage currently excluded from displayed info as they arent yet included
     tests: 'Package has passing tests',
     coverage: 'Package has at least 70% test coverage',
-    vulnerabilities: 'Package has no known security vulnerabilities'
+    vulnerabilities: 'There are no known security vulnerabilities in the package or its dependency tree'
   }
 
   return `
@@ -66,8 +67,6 @@ function renderAbout () {
               <li><span>${criteria.sourceControl}</span></li>
               <li><span>${criteria.license}</span></li>
               <li><span>${criteria.usage}</span></li>
-              <li><span>${criteria.tests}</span></li>
-              <li><span>${criteria.coverage}</span></li>
               <li><span>${criteria.vulnerabilities}</span></li>
             </ul>
             <h2>Credits</h2>
