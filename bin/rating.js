@@ -58,7 +58,7 @@ function recompute() {
   };
 
   request.get({
-    url: ES + '/_search?size=100&scroll=5m&search_type=scan',
+    url: ES + '/_search?size=100&scroll=5m',
     json: { query : { match_all : {} } },
   }, function(e, r, o) {
     if (e || !o) {
