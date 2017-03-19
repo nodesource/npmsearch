@@ -143,6 +143,11 @@ textarea, input {
 #result-container {
   display: none;
   flex-grow: 1;
+  margin: 25px auto;
+  min-width: 800px;
+  max-width: 80%;
+  border-left: 1px solid #E1E7E6;
+  border-right: 1px solid #E1E7E6;
 }
 
 #result-container table.list {
