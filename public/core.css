@@ -271,3 +271,11 @@ section#intro {
   right: 1%;
   color: #6DD9F9;
 }
+
+#result-container {
+  margin: 25px auto;
+  min-width: 800px;
+  max-width: 80%;
+  border-left: 1px solid #E1E7E6;
+  border-right: 1px solid #E1E7E6;
+}
