@@ -32,7 +32,8 @@ curl "http://npmsearch.com/query?q=dom&fields=name"
 * __scripts__
 * __times__
 * __version__
-* __rating__ - computed rating as per [bin/rating.js](bin/rating.js)
+* __score__ - npmsearch uses The [NodeSource Certification Process](http://npmsearch.com/about) to compute score
+* __rating__ - the original rating (computed as per [bin/rating.js](bin/rating.js)) has been deprecated, and the rating field is now `score/10`
 
 # Running your own npmsearch
 
