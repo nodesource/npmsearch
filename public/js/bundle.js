@@ -7356,7 +7356,7 @@ skateboard(function(stream) {
       var results = [];
       obj.response.docs.forEach(function(doc) {
         if (typeof doc.score === 'undefined') {
-          doc.score = 0.0;
+          doc.score = 0;
         }
 
         if (isNaN(doc.score) || typeof doc.description === 'undefined') {
@@ -7400,9 +7400,9 @@ skateboard(function(stream) {
         if (isNaN(doc.score)) {
           //return;
         } else if (doc.score >= 99.9) {
-          doc.score = '10';
+          doc.score = '100';
         } else {
-          doc.score = Number(doc.score/10).toFixed(1);
+          doc.score = doc.score;
         }
         results.push(doc);
       });
@@ -7985,8 +7985,8 @@ const ok = '#ffb726'
 const bad = '#ff6040'
 
 const scoreColors = [
-  [9.5, certified],
-  [8.6, ok],
+  [95, certified],
+  [86, ok],
   [0, bad]
 ]
 

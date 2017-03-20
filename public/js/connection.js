@@ -355,7 +355,7 @@ skateboard(function(stream) {
       var results = [];
       obj.response.docs.forEach(function(doc) {
         if (typeof doc.score === 'undefined') {
-          doc.score = 0.0;
+          doc.score = 0;
         }
 
         if (isNaN(doc.score) || typeof doc.description === 'undefined') {
@@ -399,9 +399,9 @@ skateboard(function(stream) {
         if (isNaN(doc.score)) {
           //return;
         } else if (doc.score >= 99.9) {
-          doc.score = '10';
+          doc.score = '100';
         } else {
-          doc.score = Number(doc.score/10).toFixed(1);
+          doc.score = doc.score;
         }
         results.push(doc);
       });

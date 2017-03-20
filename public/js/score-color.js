@@ -6,8 +6,8 @@ const ok = '#ffb726'
 const bad = '#ff6040'
 
 const scoreColors = [
-  [9.5, certified],
-  [8.6, ok],
+  [95, certified],
+  [86, ok],
   [0, bad]
 ]
 
