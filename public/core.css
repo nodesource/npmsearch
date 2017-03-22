@@ -144,14 +144,12 @@ textarea, input {
   display: none;
   flex-grow: 1;
   margin: 25px auto;
-  min-width: 800px;
-  max-width: 80%;
   border-left: 1px solid #E1E7E6;
   border-right: 1px solid #E1E7E6;
 }
 
 #result-container table.list {
-  width: 100%;
+  width: 1400px;
   border-collapse: collapse;
 }
 #result-container table thead th {
@@ -339,6 +337,26 @@ body.searching #searching {
 
 body.searching #result-table {
   display: none;
+}
+
+#result-container table tbody td#score {
+  width: 105px;
+}
+
+#result-container table tbody td#name {
+  width: 60%;
+}
+
+#result-container table tbody td#version {
+  width: 120px;
+}
+
+#result-container table tbody td#author {
+  width: 10%;
+}
+
+#result-container table tbody td#update {
+  width: 120px;
 }
 
 div.score div.num {
