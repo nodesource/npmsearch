@@ -59,7 +59,7 @@ var runSearch = function(client, search, start, rows, fn) {
     };
 
     out.type = "results";
-    client.writable && client.write(JSON.stringify(out)+'\n');
+    client.writable && client.write(new Buffer(JSON.stringify(out)+'\n'));
     fn && fn(null, out);
   });
 

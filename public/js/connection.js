@@ -336,8 +336,14 @@ skateboard(function(stream) {
 
   stream.on('data', function(d) {
     searching = false;
+    var obj = {}
+    d = (new Buffer(d)).toString()
 
-    var obj = JSON.parse(d);
+    try {
+      obj = JSON.parse(d);
+    } catch (e) {
+      return
+    }
 
     if (obj.response && obj.response.docs.length) {
 
