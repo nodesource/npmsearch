@@ -149,9 +149,15 @@ textarea, input {
 }
 
 #result-container table.list {
-  width: 1400px;
   border-collapse: collapse;
 }
+
+@media all and (min-width: 1400px) {
+  #result-container table.list {
+    width: 1400px;
+  }
+}
+
 #result-container table thead th {
   height: 32px;
   border-bottom: 1px solid #e1e7e6;
