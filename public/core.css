@@ -350,7 +350,7 @@ body.searching #result-table {
 }
 
 #result-container table tbody td#name {
-  width: 60%;
+  width: 40%;
 }
 
 #result-container table tbody td#version {
@@ -358,7 +358,7 @@ body.searching #result-table {
 }
 
 #result-container table tbody td#author {
-  width: 10%;
+  width: 25%;
 }
 
 #result-container table tbody td#update {
