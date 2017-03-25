@@ -39,8 +39,20 @@ hr {
 }
 
 header {
-  padding: 25px 40px;
   background: #fff;
+}
+
+@media all and (min-width: 1400px) {
+  header {
+    margin: 0px auto;
+    width: 1400px;
+  }
+}
+
+@media all and (max-width: 1399px) {
+  header {
+    padding: 25px 40px;
+  }
 }
 
 header h1 {
