@@ -40,19 +40,9 @@ hr {
 
 header {
   background: #fff;
-}
-
-@media all and (min-width: 1400px) {
-  header {
-    margin: 0px auto;
-    width: 1400px;
-  }
-}
-
-@media all and (max-width: 1399px) {
-  header {
-    padding: 25px 40px;
-  }
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 header h1 {
